@@ -17,6 +17,8 @@
     <ProjectReference Include="..\SpeakerMeet.API\SpeakerMeet.API.csproj" />
     <ProjectReference Include="..\SpeakerMeet.DTO\SpeakerMeet.DTO.csproj" />
     <ProjectReference Include="..\SpeakerMeet.Services.Interfaces\SpeakerMeet.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\SpeakerMeet.Services.Tests\SpeakerMeet.Services.Tests.csproj" />
+    <ProjectReference Include="..\SpeakerMeet.Services\SpeakerMeet.Services.csproj" />
   </ItemGroup>
 
 </Project>
