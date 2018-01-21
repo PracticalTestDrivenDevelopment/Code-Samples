@@ -16,4 +16,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SpeakerMeet.DTO\SpeakerMeet.DTO.csproj" />
+    <ProjectReference Include="..\SpeakerMeet.Services.Interfaces\SpeakerMeet.Services.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
