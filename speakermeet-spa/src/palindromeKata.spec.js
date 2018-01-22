@@ -32,10 +32,25 @@ describe('Is Palindrome', () => {
     // assert
     expect(result).to.be.false;
   });
+
+  it('two matching letters are a palindrome', () => {
+    // arrange
+    const value = 'oo';
+
+    // act
+    const result = isPalindrome(value);
+
+    // assert
+    expect(result).to.be.true;
+  });
 });
 
 function isPalindrome(value) {
   if (value.length === 1) {
+    return true;
+  }
+
+  if (value.length === 2 && value[0] === value[1]) {
     return true;
   }
 
