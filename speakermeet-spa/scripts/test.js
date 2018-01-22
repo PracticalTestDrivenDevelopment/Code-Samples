@@ -1,11 +1,19 @@
 'use strict';
 
-import jsdom from 'jsdom';
+import { JSDOM } from 'jsdom';
+import fetchPonyfill from 'fetch-ponyfill';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-global.document = jsdom.jsdom('<html><body></body></html>');
-global.window = document.defaultView;
+const { fetch } = fetchPonyfill();
+
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = jsdom;
+window.fetch = window.fetch || fetch;
+
+global.window = window;
+global.document = window.document;
+global.fetch = window.fetch;
 global.navigator = window.navigator;
 
 function noop() {

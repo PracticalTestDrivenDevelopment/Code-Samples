@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import sinon from 'sinon';
 import factory from '../services/serviceFactory';
-import { MockSpeakerService } from '../services/mockSpeakerService';
+import MockSpeakerService from '../services/mockSpeakerService';
 
 describe('Speaker Actions', () => {
   describe('Sync Actions', () => {

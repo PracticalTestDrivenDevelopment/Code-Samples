@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { MockSpeakerService } from './mockSpeakerService';
+import SpeakerService from './speakerService';
+import MockSpeakerService from './mockSpeakerService';
 import factory from './serviceFactory';
  
 describe('Service Factory', () => {
@@ -18,7 +19,7 @@ describe('Service Factory', () => {
     let result = factory.createSpeakerService();
   
     // assert
-    expect(result).to.be.an.instanceof(MockSpeakerService);
+    expect(result).to.be.an.instanceOf(SpeakerService);
   });
 
   it('returns the same speaker service', () => {

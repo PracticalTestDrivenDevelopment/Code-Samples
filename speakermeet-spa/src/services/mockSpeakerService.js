@@ -1,7 +1,10 @@
 import * as errorTypes from '../reducers/errorTypes';
-
-export class MockSpeakerService {
+import SpeakerService from './speakerService';
+ 
+ export default class MockSpeakerService extends SpeakerService {
   constructor() {
+    super();
+    
     this._speakers = [];
   }
 

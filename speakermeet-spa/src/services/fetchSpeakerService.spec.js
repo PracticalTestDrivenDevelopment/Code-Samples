@@ -1,25 +1,34 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
+import fetchPonyfill from 'fetch-ponyfill';
+const { Response, Headers } = fetchPonyfill();
 import * as errorTypes from '../reducers/errorTypes';
-import MockSpeakerService from '../services/mockSpeakerService';
+import FetchSpeakerService from './fetchSpeakerService';
 
-describe('Mock Speaker Service', () => {
+describe('Fetch Speaker Service', () => {
   it('exits', () => {
-    expect(MockSpeakerService).to.exist;
+    expect(FetchSpeakerService).to.exist;
   });
 
   it('can be constructed', () => {
     // arrange
-    let service = new MockSpeakerService();
+    let service = new FetchSpeakerService();
 
     // assert
-    expect(service).to.be.an.instanceof(MockSpeakerService);
+    expect(service).to.be.an.instanceof(FetchSpeakerService);
   });
 
   describe('After Initialization', () => {
     let service = null;
+    let fetch = null;
 
     beforeEach(() => {
-      service = new MockSpeakerService();
+      fetch = sinon.stub(global, 'fetch');
+      service = new FetchSpeakerService('http://localhost');
+    });
+
+    afterEach(() => {
+      fetch.restore();
     });
 
     describe('Create', () => {
@@ -36,6 +45,9 @@ describe('Mock Speaker Service', () => {
 
       describe('No Speakers Exist', () => {
         it('returns an empty array', () => {
+          // arrange
+          fetch.returns(okResponse([]));
+
           // act
           let promise = service.getAll();
 
@@ -49,7 +61,7 @@ describe('Mock Speaker Service', () => {
       describe('Speaker Listing', () => {
         it('returns speakers', () => {
           // arrange
-          service.create({});
+          fetch.returns(okResponse([{}]));
 
           // act
           let promise = service.getAll();
@@ -70,27 +82,36 @@ describe('Mock Speaker Service', () => {
 
       describe('Speaker Does Not Exist', () => {
         it('SPEAKER_NOT_FOUND error is generated', () => {
+          // arrange
+          fetch.returns(notFoundResponse());
+
           // act
           const promise = service.getById('fake-speaker');
 
           // assert
-          return promise.catch(error => {
-            expect(error.type).to.equal(errorTypes.SPEAKER_NOT_FOUND);
-          });
+          return promise
+            .then(() => {
+              throw { type: 'Error not returned' };
+            })
+            .catch(error => {
+              expect(error.type).to.equal(errorTypes.SPEAKER_NOT_FOUND);
+            });
         });
       });
 
       describe('Speaker Exists', () => {
         it('returns the speaker', () => {
           // arrange
-          const speaker = { id: 'test-speaker' };
-          service.create(speaker);
-      
+          const speaker = {
+            id: 'test-speaker'
+          };
+          fetch.returns(okResponse(speaker));
+
           // act
           let promise = service.getById('test-speaker');
-      
+
           // assert
-          return promise.then((speaker) => {
+          return promise.then(speaker => {
             expect(speaker).to.not.be.null;
             expect(speaker.id).to.equal('test-speaker');
           });
@@ -99,3 +120,35 @@ describe('Mock Speaker Service', () => {
     });
   });
 });
+
+function baseResponse() {
+  let response = new Response();
+  response.headers = new Headers({
+    'Content-Type': 'application/json'
+  });
+  response.ok = true;
+  response.status = 200;
+  response.statusText = 'OK';
+
+  return response;
+}
+
+function okResponse(body) {
+  return new Promise((resolve, reject) => {
+    let response = baseResponse();
+    response.body = JSON.stringify(body);
+
+    resolve(response);
+  });
+}
+
+function notFoundResponse() {
+  return new Promise((resolve, reject) => {
+    let response = baseResponse();
+    response.ok = false;
+    response.status = 404;
+    response.statusText = 'NOT FOUND';
+
+    resolve(response);
+  });
+}
