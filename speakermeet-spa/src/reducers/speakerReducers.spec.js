@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import * as actions from '../actions/speakerActions';
 import * as types from './actionTypes';
+import { speakersReducer } from './speakerReducer';
 
 describe('Speaker Reducers', () => {
   describe('Speakers Reducer', () => {
@@ -28,12 +29,3 @@ describe('Speaker Reducers', () => {
     });
   });
 });
-
-function speakersReducer(state = [], action) {
-  switch (action.type) {
-    case types.GET_SPEAKERS_SUCCESS:
-      return action.speakers;
-    default:
-      return state;
-  }
-}
