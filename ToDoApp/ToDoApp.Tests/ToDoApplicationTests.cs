@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Xunit;
 
 namespace ToDoApp.Tests
@@ -40,22 +38,5 @@ namespace ToDoApp.Tests
             // Act
             todo.AddTodo(item);
         }
-    }
-
-    internal class TodoList
-    {
-        public IEnumerable<Todo> Items { get; } = new List<Todo>();
-
-        public TodoList()
-        {
-        }
-
-        internal void AddTodo(Todo item)
-        {
-        }
-    }
-
-    public class Todo
-    {
     }
 }
