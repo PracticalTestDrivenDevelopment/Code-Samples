@@ -39,8 +39,7 @@ namespace MastermindGame
         {
             var checkResult = "";
 
-            for (var x = 0; x < 4; x++)
-            {
+            Times(4, x => {
                 if (guess[x] == password[x])
                 {
                     checkResult += "+";
@@ -49,10 +48,27 @@ namespace MastermindGame
                 {
                     checkResult += "-";
                 }
-            }
+            });
 
             _inout.WriteLine(checkResult);
             return checkResult.Count(c => c == '+');
+        }
+
+        private string CreateRandomPassword()
+        {
+            var password = new[] { 'A', 'A', 'A', 'A' };
+
+            Times(4, x => password[x] = _random.Letter());
+
+            return new string(password);
+        }
+
+        private static void Times(int count, Action<int> act)
+        {
+            for (var index = 0; index < count; index++)
+            {
+                act(index);
+            }
         }
 
         private string Guess()
@@ -70,21 +86,6 @@ namespace MastermindGame
             // Password guess was wrong size - Error Message
             _inout.WriteLine("Password length is 4.");
             return Guess();
-        }
-
-        private string CreateRandomPassword()
-        {
-            var password = new[] { 'A', 'A', 'A', 'A' };
-
-            var j = 0;
-
-            password_loop:
-            password[j] = (char)(_random.Number(6) + 65);
-            j = j + 1;
-
-            if (j < 4) goto password_loop;
-
-            return new string(password);
         }
     }
 }

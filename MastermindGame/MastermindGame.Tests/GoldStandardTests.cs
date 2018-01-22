@@ -15,7 +15,7 @@ namespace MastermindGame.Tests
             var game = new Mastermind(inout, rand);
 
             // Arrange - Inputs
-            rand.SetNumbers(0, 1, 2, 5);
+            rand.SetLetters('A', 'B', 'C', 'F');
             inout.InFeed.Enqueue("AAA");
             inout.InFeed.Enqueue("AAAA");
             inout.InFeed.Enqueue("ABBB");
