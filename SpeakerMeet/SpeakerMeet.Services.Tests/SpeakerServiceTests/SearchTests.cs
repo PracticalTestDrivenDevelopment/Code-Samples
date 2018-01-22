@@ -1,38 +1,53 @@
+using System.Collections.Generic;
 using System.Linq;
+using SpeakerMeet.DTO;
 using SpeakerMeet.Services.Interfaces;
+using SpeakerMeet.Services.Tests.Factories;
+using SpeakerMeet.Services.Tests.Fakes;
 using Xunit;
 
 namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
 {
-    public class SearchTests
+    [Trait("Category", "SpeakerService")]
+    public class Search
     {
         private readonly SpeakerService _speakerService;
 
-        public SearchTests()
+        public Search()
         {
-            _speakerService = new SpeakerService();
-        }
+            var fakeRepository = new FakeRepository();
+            SpeakerFactory.Create(fakeRepository);
+            SpeakerFactory.Create(fakeRepository, name: "Josh");
+            SpeakerFactory.Create(fakeRepository, name: "Joseph");
+            SpeakerFactory.Create(fakeRepository, name: "Bill");
 
-        [Fact(Skip = "No longer needed")]
-        public void ItExists()
-        {
-            var speakerService = new SpeakerService();
+            _speakerService = new SpeakerService(fakeRepository);
         }
 
         [Fact]
         public void ItHasSearchMethod()
         {
-            var speakerService = new SpeakerService();
+            _speakerService.Search("test");
+        }
 
-            speakerService.Search("test");
+        [Fact]
+        public void ItReturnsCollectionOfSpeakers()
+        {
+            // Arrange
+            // Act
+            var speakers = _speakerService.Search("test");
+
+            // Assert
+            Assert.NotNull(speakers);
+            Assert.IsAssignableFrom<IEnumerable<Speaker>>(speakers);
         }
 
         [Fact]
         public void ItImplementsISpeakerService()
         {
-            var speakerService = new SpeakerService();
+            var speakerService = _speakerService;
 
-            Assert.True(speakerService is ISpeakerService);
+            Assert.IsAssignableFrom<ISpeakerService>(speakerService);
         }
 
         [Fact]

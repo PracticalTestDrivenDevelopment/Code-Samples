@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Business", "Spe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Business.Tests", "SpeakerMeet.Business.Tests\SpeakerMeet.Business.Tests.csproj", "{952E0163-FFEE-4BB1-944B-45CC8C98602B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Exceptions", "SpeakerMeet.Exceptions\SpeakerMeet.Exceptions.csproj", "{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Models", "SpeakerMeet.Models\SpeakerMeet.Models.csproj", "{2B491EF0-F6D2-45A1-A549-5367741CD2DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B491EF0-F6D2-45A1-A549-5367741CD2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B491EF0-F6D2-45A1-A549-5367741CD2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B491EF0-F6D2-45A1-A549-5367741CD2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B491EF0-F6D2-45A1-A549-5367741CD2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

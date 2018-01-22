@@ -11,6 +11,11 @@ namespace SpeakerMeet.Services.Tests
         private int _identityCounter;
         public IList<T> DataSet { get; set; } = new List<T>();
 
+        public T Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public T Get(Func<T, bool> predicate)
         {
             return GetAll().Where(predicate).FirstOrDefault();

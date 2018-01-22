@@ -6,6 +6,7 @@ namespace SpeakerMeet.Repositories.Interfaces
 {
     public interface IRepository<T>
     {
+        T Get(int id);
         T Get(Func<T, bool> predicate);
         IQueryable<T> GetAll();
         T Save(T item);
