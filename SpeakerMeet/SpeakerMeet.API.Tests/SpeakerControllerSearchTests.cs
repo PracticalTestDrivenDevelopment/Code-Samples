@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using SpeakerMeet.API.Controllers;
+using SpeakerMeet.DTO;
+using SpeakerMeet.Services.Interfaces;
 using Xunit;
 
 namespace SpeakerMeet.API.Tests
@@ -9,50 +12,33 @@ namespace SpeakerMeet.API.Tests
     public class SpeakerControllerSearchTests
     {
         private readonly SpeakerController _controller;
+        private static Mock<ISpeakerService> _speakerServiceMock;
+        private readonly List<Speaker> _speakers;
 
         public SpeakerControllerSearchTests()
         {
-            _controller = new SpeakerController();
-        }
+            _speakers = new List<Speaker> { new Speaker
+            {
+                Name = "test"
+            } };
 
-        [Fact(Skip="No longer needed")]
-        public void ItExists()
-        {
-            var controller = new SpeakerController();
-        }
+            // define the mock
+            _speakerServiceMock = new Mock<ISpeakerService>();
 
-        [Fact(Skip = "No longer needed")]
-        public void ItHasSearch()
-        {
-            // Arrange
-            var controller = new SpeakerController();
+            // when search is called, return list of speakers containing speaker
+            _speakerServiceMock.Setup(x => x.Search(It.IsAny<string>()))
+                .Returns(() => _speakers);
 
-            // Act
-            controller.Search("Jos");
-        }
-
-        [Fact(Skip = "No longer needed")]
-        public void ItReturnsOkObjectResult()
-        {
-            // Arrange
-            var controller = new SpeakerController();
-
-            // Act
-            var result = controller.Search("Jos");
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<OkObjectResult>(result);
+            // pass mock object as ISpeakerService
+            _controller = new SpeakerController(_speakerServiceMock.Object);
         }
 
         [Fact]
         public void ItReturnsCollectionOfSpeakers()
         {
             // Arrange
-            var controller = new SpeakerController();
-
             // Act
-            var result = controller.Search("Jos") as OkObjectResult;
+            var result = _controller.Search("Jos") as OkObjectResult;
 
             // Assert
             Assert.NotNull(result);
@@ -60,7 +46,7 @@ namespace SpeakerMeet.API.Tests
             Assert.IsType<List<Speaker>>(result.Value);
         }
 
-        [Fact]
+        [Fact(Skip = "No longer needed")]
         public void GivenExactMatchThenOneSpeakerInCollection()
         {
             // Arrange
@@ -73,7 +59,7 @@ namespace SpeakerMeet.API.Tests
             Assert.Equal("Joshua", speakers[0].Name);
         }
 
-        [Theory]
+        [Theory(Skip = "No longer needed")]
         [InlineData("Joshua")]
         [InlineData("joshua")]
         [InlineData("JoShUa")]
@@ -89,7 +75,7 @@ namespace SpeakerMeet.API.Tests
             Assert.Equal("Joshua", speakers[0].Name);
         }
 
-        [Fact]
+        [Fact(Skip = "No longer needed")]
         public void GivenNoMatchThenEmptyCollection()
         {
             // Arrange
@@ -101,7 +87,7 @@ namespace SpeakerMeet.API.Tests
             Assert.Equal(0, speakers.Count);
         }
 
-        [Fact]
+        [Fact(Skip = "No longer needed")]
         public void Given3MatchThenCollectionWith3Speakers()
         {
             // Arrange
@@ -114,6 +100,60 @@ namespace SpeakerMeet.API.Tests
             Assert.True(speakers.Any(s => s.Name == "Josh"));
             Assert.True(speakers.Any(s => s.Name == "Joshua"));
             Assert.True(speakers.Any(s => s.Name == "Joseph"));
+        }
+
+        [Fact(Skip = "No longer needed")]
+        public void ItAcceptsInterface()
+        {
+            // Arrange 
+            ISpeakerService testSpeakerService = new TestSpeakerService();
+
+            // Act
+            var controller = new SpeakerController(testSpeakerService);
+
+            // Assert
+            Assert.NotNull(controller);
+        }
+
+        [Fact(Skip = "No longer needed")]
+        public void ItCallsSearchServiceOnce()
+        {
+            // Arrange
+            // Act
+            _controller.Search("jos");
+
+            // Assert
+            _speakerServiceMock.Verify(mock => mock.Search(It.IsAny<string>()),
+                Times.Once());
+        }
+
+        [Fact]
+        public void GivenSearchStringThenSpeakerServiceSearchCalledWithString()
+        {
+            // Arrange
+            var searchString = "jos";
+
+            // Act
+            _controller.Search(searchString);
+
+            // Assert
+            _speakerServiceMock.Verify(mock => mock.Search(searchString),
+                Times.Once());
+        }
+
+        [Fact]
+        public void GivenSpeakerServiceThenResultsReturned()
+        {
+            // Arrange
+            var searchString = "jos";
+
+            // Act 
+            var result = _controller.Search(searchString) as OkObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            var speakers = ((IEnumerable<Speaker>)result.Value).ToList();
+            Assert.Equal(_speakers, speakers);
         }
     }
 }
