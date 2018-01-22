@@ -89,6 +89,7 @@ namespace ToDoApp.Tests
 
         internal void Validate()
         {
+            Description = Description ?? throw new DescriptionRequiredException();
         }
     }
 }
