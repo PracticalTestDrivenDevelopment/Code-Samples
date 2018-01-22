@@ -21,6 +21,28 @@ describe('Speaker List', () => {
         expect(component.find('#no-speakers').text()).to.equal('No Speakers Available.');
       });
     });
+
+    describe('Speakers Exist', () => {
+        it('renders a table when speakers exist', () => {
+          // arrange
+          const speakers = [{
+            id: 'test-speaker-1',
+            firstName: 'Test',
+            lastName: 'Speaker 1'
+          }, {
+            id: 'test-speaker-2',
+            firstName: 'Test',
+            lastName: 'Speaker 2'
+          }];
+      
+          // act
+          const component = setup({speakers});
+      
+          // assert        
+          expect(component.find('.speakers').children()).to.have.lengthOf(2);
+          expect(component.find('.speakers').childAt(0).type().name).to.equal('SpeakerListRow');
+        });
+      });
   });
 });
 
