@@ -5,3 +5,13 @@ describe('Test Framework', () => {
         expect(1).to.equal(1);
     });
 });
+
+describe('Is Palindrome', ()=> {
+    it('exists', () => {
+        expect(isPalindrome).to.exist;
+    });
+});
+
+function isPalindrome() {
+    
+}
