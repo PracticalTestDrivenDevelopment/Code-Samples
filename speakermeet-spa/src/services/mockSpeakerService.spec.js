@@ -79,6 +79,23 @@ describe('Mock Speaker Service', () => {
           });
         });
       });
+
+      describe('Speaker Exists', () => {
+        it('returns the speaker', () => {
+          // arrange
+          const speaker = { id: 'test-speaker' };
+          service.create(speaker);
+      
+          // act
+          let promise = service.getById('test-speaker');
+      
+          // assert
+          return promise.then((speaker) => {
+            expect(speaker).to.not.be.null;
+            expect(speaker.id).to.equal('test-speaker');
+          });
+        });
+      });
     });
   });
 });
