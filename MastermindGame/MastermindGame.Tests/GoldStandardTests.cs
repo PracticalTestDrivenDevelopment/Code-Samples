@@ -11,9 +11,11 @@ namespace MastermindGame.Tests
         {
             // Arrange
             var inout = new MockInputOutput();
-            var game = new Mastermind(inout);
+            var rand = new MockRandomGenerator();
+            var game = new Mastermind(inout, rand);
 
             // Arrange - Inputs
+            rand.SetNumbers(0, 1, 2, 5);
             inout.InFeed.Enqueue("AAA");
             inout.InFeed.Enqueue("AAAA");
             inout.InFeed.Enqueue("ABBB");
@@ -39,7 +41,7 @@ namespace MastermindGame.Tests
             expectedOutputs.Enqueue("Congratulations you guessed the password in 6 tries." + Environment.NewLine);
 
             // Act
-            game.Play("ABCF");
+            game.Play();
 
             // Assert
             inout.OutFeed.ForEach(text =>

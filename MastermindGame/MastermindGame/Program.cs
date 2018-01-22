@@ -4,8 +4,9 @@
     {
         static void Main(string[] args)
         {
+            var rand = new RandomGenerator();
             var inout = new ConsoleInputOutput();
-            var game = new Mastermind(inout);
+            var game = new Mastermind(inout, rand);
 
             var password = args.Length > 0 ? args[0] : null;
             game.Play(password);

@@ -6,74 +6,85 @@ namespace MastermindGame
     public class Mastermind
     {
         private readonly IInputOutput _inout;
-        private string guess;
-        private int tries;
-        private int correctPositions;
+        private readonly IRandomGenerator _random;
 
-        public Mastermind(IInputOutput inout)
+        private int _tries;
+
+        public Mastermind(IInputOutput inout, IRandomGenerator random)
         {
             _inout = inout;
+            _random = random;
         }
 
         public void Play(string password = null)
         {
-            // Determine if a password was passed in?
             password = password ?? CreateRandomPassword();
+            var correctPositions = 0;
 
-            // Player move - guess the password           
             while (correctPositions != 4)
             {
-                _inout.Write("Take a guess: ");
-                guess = _inout.ReadLine();
-                tries = tries + 1;
+                correctPositions = GuessPasswordAndCheck(password);
+            }
 
-                if (guess.Length != 4)
+            _inout.WriteLine("Congratulations you guessed the password in " + _tries + " tries.");
+        }
+
+        private int GuessPasswordAndCheck(string password)
+        {
+            var guess = Guess();
+            return Check(guess, password);
+        }
+
+        private int Check(string guess, string password)
+        {
+            var checkResult = "";
+
+            for (var x = 0; x < 4; x++)
+            {
+                if (guess[x] == password[x])
                 {
-                    // Password guess was wrong size - Error Message
-                    _inout.WriteLine("Password length is 4.");
+                    checkResult += "+";
                 }
-                else
+                else if (password.Contains(guess[x]))
                 {
-                    // Check if the password provided by the player is correct
-                    guess = guess.ToUpper();
-                    var guessResult = "";
-
-                    for (var x = 0; x < 4; x++)
-                    {
-                        if (guess[x] == password[x])
-                        {
-                            guessResult += "+";
-                        }
-                        else if (password.Contains(guess[x]))
-                        {
-                            guessResult += "-";
-                        }
-                    }
-
-                    correctPositions = guessResult.Count(c => c == '+');
-                    _inout.WriteLine(guessResult);
+                    checkResult += "-";
                 }
             }
 
-            // Game over you win
-            _inout.WriteLine("Congratulations you guessed the password in " + tries + " tries.");
+            _inout.WriteLine(checkResult);
+            return checkResult.Count(c => c == '+');
+        }
+
+        private string Guess()
+        {
+            _tries = _tries + 1;
+
+            _inout.Write("Take a guess: ");
+            var guess = _inout.ReadLine();
+
+            if (guess.Length == 4)
+            {
+                return guess.ToUpper();
+            }
+
+            // Password guess was wrong size - Error Message
+            _inout.WriteLine("Password length is 4.");
+            return Guess();
         }
 
         private string CreateRandomPassword()
         {
-            // Initialize randomness
-            Random rand = new Random(DateTime.Now.Millisecond);
-
             var password = new[] { 'A', 'A', 'A', 'A' };
 
             var j = 0;
 
             password_loop:
-            password[j] = (char)(rand.Next(6) + 65);
+            password[j] = (char)(_random.Number(6) + 65);
             j = j + 1;
 
             if (j < 4) goto password_loop;
-            return password.ToString();
+
+            return new string(password);
         }
     }
 }
