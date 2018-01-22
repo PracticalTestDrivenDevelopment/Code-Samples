@@ -34,8 +34,29 @@ describe('Speaker Actions', () => {
 
   describe('Async Actions', () => {
     describe('Get Speakers', () => {
+      const middleware = [thunk];
+      let mockStore;
+
+      beforeEach(() => {
+        mockStore = configureMockStore(middleware);
+      });
+
       it('exists', () => {
         expect(speakerActions.getSpeakers).to.exist;
+      });
+
+      it('creates GET_SPEAKERS_SUCCESS when loading speakers', () => {
+        // arrange
+        const speaker = {
+          id: 'test-speaker',
+          firstName: 'Test',
+          lastName: 'Speaker'
+        };
+
+        const expectedActions = speakerActions.getSpeakersSuccess([speaker]);
+        const store = mockStore({
+          speakers: []
+        });
       });
     });
   });
