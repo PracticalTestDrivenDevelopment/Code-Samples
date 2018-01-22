@@ -10,8 +10,19 @@ describe('Is Palindrome', ()=> {
     it('exists', () => {
         expect(isPalindrome).to.exist;
     });
+
+    it('a single letter is a palindrome', () => {
+        // arrange
+        const value = 'a';
+       
+        // act
+        const result = isPalindrome(value);
+       
+        // assert
+        expect(result).to.be.true;
+      });
 });
 
 function isPalindrome() {
-    
+    return true;
 }
