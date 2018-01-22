@@ -65,5 +65,6 @@ namespace ToDoApp.Tests
 
     public class Todo
     {
+        public string Description { get; set; }
     }
 }
