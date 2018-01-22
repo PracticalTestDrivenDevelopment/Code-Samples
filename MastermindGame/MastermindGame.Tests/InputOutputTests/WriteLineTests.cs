@@ -29,5 +29,19 @@ namespace MastermindGame.Tests
             Assert.Single(writtenText);
             Assert.Equal("Text" + Environment.NewLine, writtenText.First());
         }
+
+        [Fact]
+        public void ItCanWriteABlankLine()
+        {
+            // Arrange
+            var inout = new MockInputOutput();
+
+            // Act
+            inout.WriteLine();
+
+            // Assert
+            Assert.Single(inout.OutFeed);
+            Assert.Equal(Environment.NewLine, inout.OutFeed.First());
+        }
     }
 }

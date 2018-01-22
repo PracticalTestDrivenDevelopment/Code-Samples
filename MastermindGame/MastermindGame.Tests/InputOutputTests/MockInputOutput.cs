@@ -15,14 +15,14 @@ namespace MastermindGame.Tests
             InFeed = new Queue<string>();
         }
 
-        public void Write(string text)
+        public void Write(string text, params object[] args)
         {
             OutFeed.Add(text);
         }
 
-        public void WriteLine(string text)
+        public void WriteLine(string text = null)
         {
-            OutFeed.Add(text + Environment.NewLine);
+            OutFeed.Add((text ?? "") + Environment.NewLine);
         }
 
         public char Read()

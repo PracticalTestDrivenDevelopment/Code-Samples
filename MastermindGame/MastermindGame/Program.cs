@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            var game = new Mastermind();
+            var inout = new ConsoleInputOutput();
+            var game = new Mastermind(inout);
             game.Play(args);
         }
     }
