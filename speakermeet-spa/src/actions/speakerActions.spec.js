@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { GET_SPEAKERS_SUCCESS } from '../reducers/actionTypes';
+import * as types from '../reducers/actionTypes';
 import * as speakerActions from './speakerActions';
 
 describe('Speaker Actions', () => {
@@ -25,7 +25,7 @@ describe('Speaker Actions', () => {
         const result = speakerActions.getSpeakersSuccess(speakers);
 
         // assert
-        expect(result.type).to.equal(GET_SPEAKERS_SUCCESS);
+        expect(result.type).to.equal(types.GET_SPEAKERS_SUCCESS);
         expect(result.speakers).to.have.lengthOf(1);
         expect(result.speakers).to.deep.equal(speakers);
       });
@@ -56,6 +56,14 @@ describe('Speaker Actions', () => {
         const expectedActions = speakerActions.getSpeakersSuccess([speaker]);
         const store = mockStore({
           speakers: []
+        });
+
+        // act
+        return store.dispatch(speakerActions.getSpeakers()).then(() => {
+          const actions = store.getActions();
+
+          // assert
+          expect(actions[0].type).to.equal(types.GET_SPEAKERS_SUCCESS);
         });
       });
     });

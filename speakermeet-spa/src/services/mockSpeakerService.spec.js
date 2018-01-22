@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { MockSpeakerService } from '../services/mockSpeakerService';
 
 describe('Mock Speaker Service', () => {
   it('exits', () => {
@@ -61,21 +62,3 @@ describe('Mock Speaker Service', () => {
     });
   });
 });
-
-class MockSpeakerService {
-  constructor() {
-    this._speakers = [];
-  }
-
-  create(speaker) {
-    this._speakers.push(speaker);
-  }
-
-  getAll() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], this._speakers));
-      }, 0);
-    });
-  }
-}
