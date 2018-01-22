@@ -27,42 +27,22 @@ namespace MastermindGame.Tests
             expectedOutputs.Enqueue("Take a guess: ");
             expectedOutputs.Enqueue("Password length is 4." + Environment.NewLine);
             expectedOutputs.Enqueue("Take a guess: ");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue(Environment.NewLine);
+            expectedOutputs.Enqueue("+---" + Environment.NewLine);
             expectedOutputs.Enqueue("Take a guess: ");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue(Environment.NewLine);
+            expectedOutputs.Enqueue("++--" + Environment.NewLine);
             expectedOutputs.Enqueue("Take a guess: ");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("-");
-            expectedOutputs.Enqueue(Environment.NewLine);
+            expectedOutputs.Enqueue("+++-" + Environment.NewLine);
             expectedOutputs.Enqueue("Take a guess: ");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue(Environment.NewLine);
+            expectedOutputs.Enqueue("+++" + Environment.NewLine);
             expectedOutputs.Enqueue("Take a guess: ");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue("+");
-            expectedOutputs.Enqueue(Environment.NewLine);
+            expectedOutputs.Enqueue("++++" + Environment.NewLine);
             expectedOutputs.Enqueue("Congratulations you guessed the password in 6 tries." + Environment.NewLine);
-            expectedOutputs.Enqueue("Press any key to quit." + Environment.NewLine);
 
             // Act
-            game.Play(new[] { "ABCF" });
+            game.Play("ABCF");
 
             // Assert
-            inout.OutFeed.ForEach((text) =>
+            inout.OutFeed.ForEach(text =>
             {
                 Assert.Equal(expectedOutputs.Dequeue(), text);
             });
