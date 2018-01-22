@@ -46,5 +46,20 @@ describe('Speaker Reducers', () => {
       // assert
       expect(newState).to.deep.equal(speaker);
     });
+
+    it('sorts speakers by rank', () => {
+      // arrange
+      const initialState = [];
+      const speaker1 = { id: 'test-speaker-1', firstName: 'Test 1', lastName: 'Speaker', rank: 1};
+      const speaker2 = { id: 'test-speaker-2', firstName: 'Test 2', lastName: 'Speaker', rank: 2};
+      const action = actions.getSpeakersSuccess([speaker1, speaker2]);
+     
+      // act
+      const newState = speakersReducer(initialState, action);
+     
+      // assert
+      expect(newState).to.have.lengthOf(2);
+      expect(newState[0]).to.deep.equal(speaker2);
+    });
   });
 });
