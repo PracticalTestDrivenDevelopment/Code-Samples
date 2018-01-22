@@ -54,6 +54,17 @@ describe('Is Palindrome', () => {
     // assert
     expect(result).to.be.true;
   });
+
+  it('four letter palindrome', () => {
+    // arrange
+    const value = 'abba';
+   
+    // act
+    const result = isPalindrome(value);
+   
+    // assert
+    expect(result).to.be.true;
+  });
 });
 
 function isPalindrome(value) {
