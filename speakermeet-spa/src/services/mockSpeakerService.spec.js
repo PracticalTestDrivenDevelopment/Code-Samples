@@ -46,7 +46,7 @@ describe('Mock Speaker Service', () => {
     });
 
     describe('Speaker Listing', () => {
-      it.skip('returns speakers', () => {
+      it('returns speakers', () => {
         // arrange
         service.create({});
 
@@ -63,8 +63,14 @@ describe('Mock Speaker Service', () => {
 });
 
 class MockSpeakerService {
-  create() {}
-  
+  constructor() {
+    this._speakers = [];
+  }
+
+  create(speaker) {
+    this._speakers.push(speaker);
+  }
+
   getAll() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
