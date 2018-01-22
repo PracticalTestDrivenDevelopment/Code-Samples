@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import Header from './common/Header';
 import NotFound from './common/NotFound';
 import SpeakersPage from './speakers/SpeakersPage';
+import SpeakerDetailPage from './speakers/SpeakerDetailPage';
 import './App.css';
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
         <Header/>
         <main>
           <Switch>
-            {/* <Route exact path='/speakers/:id' component={SpeakerDetailPage}/> */}
+            <Route exact path='/speakers/:id' component={SpeakerDetailPage}/>
             <Route exact path='/speakers' component={SpeakersPage}/>  
             <Route path='**' component={NotFound}/>          
           </Switch>

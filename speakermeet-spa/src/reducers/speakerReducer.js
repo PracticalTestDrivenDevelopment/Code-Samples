@@ -8,3 +8,19 @@ export function speakersReducer(state = [], action) {
       return state;
   }
 }
+
+export function speakerReducer(
+  state = {
+    id: '',
+    firstName: '',
+    lastName: ''
+  },
+  action
+) {
+  switch (action.type) {
+    case types.GET_SPEAKER_SUCCESS:
+      return action.speaker;
+    default:
+      return state;
+  }
+}
