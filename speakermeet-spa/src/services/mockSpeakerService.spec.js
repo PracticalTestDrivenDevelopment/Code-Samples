@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import * as errorTypes from '../reducers/errorTypes';
 import { MockSpeakerService } from '../services/mockSpeakerService';
 
 describe('Mock Speaker Service', () => {
@@ -44,19 +45,38 @@ describe('Mock Speaker Service', () => {
           });
         });
       });
+
+      describe('Speaker Listing', () => {
+        it('returns speakers', () => {
+          // arrange
+          service.create({});
+
+          // act
+          let promise = service.getAll();
+
+          // assert
+          return promise.then(result => {
+            expect(result).to.have.lengthOf(1);
+          });
+        });
+      });
     });
 
-    describe('Speaker Listing', () => {
-      it('returns speakers', () => {
-        // arrange
-        service.create({});
-
-        // act
-        let promise = service.getAll();
-
+    describe('Get Speaker By Id', () => {
+      it('exists', () => {
         // assert
-        return promise.then(result => {
-          expect(result).to.have.lengthOf(1);
+        expect(service.getById).to.exist;
+      });
+
+      describe('Speaker Does Not Exist', () => {
+        it('SPEAKER_NOT_FOUND error is generated', () => {
+          // act
+          const promise = service.getById('fake-speaker');
+
+          // assert
+          return promise.catch(error => {
+            expect(error.type).to.equal(errorTypes.SPEAKER_NOT_FOUND);
+          });
         });
       });
     });
