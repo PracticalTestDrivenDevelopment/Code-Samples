@@ -29,6 +29,17 @@ namespace ToDoApp.Tests
             Assert.IsAssignableFrom<IEnumerable<Todo>>(result);
             Assert.Empty(result);
         }
+
+        [Fact]
+        public void AddTodoExists()
+        {
+            // Arrange
+            var todo = new TodoList();
+            var item = new Todo();
+
+            // Act
+            todo.AddTodo(item);
+        }
     }
 
     internal class TodoList
@@ -36,6 +47,10 @@ namespace ToDoApp.Tests
         public IEnumerable<Todo> Items { get; } = new List<Todo>();
 
         public TodoList()
+        {
+        }
+
+        internal void AddTodo(Todo item)
         {
         }
     }
