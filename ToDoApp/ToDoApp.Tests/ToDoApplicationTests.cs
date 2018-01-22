@@ -33,7 +33,10 @@ namespace ToDoApp.Tests
         {
             // Arrange
             var todo = new TodoList();
-            var item = new Todo();
+            var item = new Todo()
+            {
+                Description = "Test"
+            };
 
             // Act
             todo.AddTodo(item);

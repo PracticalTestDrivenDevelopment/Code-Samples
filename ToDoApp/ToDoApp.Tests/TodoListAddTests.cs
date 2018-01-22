@@ -26,13 +26,34 @@ namespace ToDoApp.Tests
         {
             // Arrange
             var todo = new TodoList();
-            var item = new Todo();
+            var item = new Todo()
+            {
+                Description = "Test"
+            };
 
             // Act
             todo.AddTodo(item);
 
             // Assert
             Assert.Single(todo.Items);
+        }
+
+        [Fact]
+        public void OnNullADescriptionRequiredValidationErrorOccurs()
+        {
+            // Arrange
+            var todo = new TodoList();
+            var item = new Todo()
+            {
+                Description = null
+            };
+
+            // Act
+            var exception = Record.Exception(() => todo.AddTodo(item));
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<DescriptionRequiredException>(exception);
         }
     }
 
@@ -54,10 +75,9 @@ namespace ToDoApp.Tests
 
         public void AddTodo(Todo item)
         {
-            if(item == null)
-            {
-                throw new ArgumentNullException();
-            }
+            item = item ?? throw new ArgumentNullException();
+
+            item.Description = item.Description ?? throw new DescriptionRequiredException();
 
             _items.Add(item);
         }
