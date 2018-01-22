@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace ToDoApp.Tests
 {
@@ -23,12 +26,13 @@ namespace ToDoApp.Tests
 
             // Assert
             Assert.NotNull(result);
+            Assert.Empty(result);
         }
     }
 
     internal class TodoList
     {
-        public object Items { get; } = new object();
+        public IEnumerable<Object> Items { get; } = new List<Object>();
 
         public TodoList()
         {
