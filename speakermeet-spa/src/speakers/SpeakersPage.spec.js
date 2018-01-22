@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
-import Enzyme, { mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import { SpeakersPage } from './SpeakersPage';
 
 describe('Speakers Page', () => {
@@ -11,7 +10,7 @@ describe('Speakers Page', () => {
 
   describe('Render', () => {
     beforeEach(() => {
-      Enzyme.configure({ adapter: new Adapter() });
+      
     });
 
     it('renders', () => {
