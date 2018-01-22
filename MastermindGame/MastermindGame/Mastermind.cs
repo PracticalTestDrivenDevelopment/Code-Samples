@@ -24,33 +24,35 @@ namespace MastermindGame
             if (args.Length > 0 && args[0] != null) p = args[0].ToCharArray();
             else CreateRandomPassword(); // Create a password if one was not provided
 
-            // Player move - guess the password
-            guess:
-            _inout.Write("Take a guess: ");
-            g = _inout.ReadLine().ToArray();
-            i = i + 1;
-            if (g.Length != 4) goto wrong_size;
-            if (g == p) goto success;
-            x = 0;
-            c = 0;
+            // Player move - guess the password           
+            while (c != 4)
+            {
+                _inout.Write("Take a guess: ");
+                g = _inout.ReadLine().ToArray();
 
-            // Check if the password provided by the player is correct
-            check_loop:
-            if (g[x] > 65 + 26) g[x] = (char)(g[x] - 32);
-            if (g[x] == p[x]) _inout.Write("+", c = c + 1);
-            else if (p.Contains(g[x])) _inout.Write("-");
-            x = x + 1;
-            if (x < 4) goto check_loop; // Still checking??
-            _inout.WriteLine();
-            if (c == 4) goto success; // Password must have been correct
-            goto guess; // No correct, try again
+                i = i + 1;
 
-            // Password guess was wrong size - Error Message
-            wrong_size: _inout.WriteLine("Password length is 4.");
-            goto guess;
+                if (g.Length != 4)
+                {
+                    // Password guess was wrong size - Error Message
+                    _inout.WriteLine("Password length is 4.");
+                }
+                else
+                {
+                    // Check if the password provided by the player is correct
+                    for (x = 0, c = 0; g.Length == 4 && x < 4; x++)
+                    {
+                        if (g[x] > 65 + 26) g[x] = (char)(g[x] - 32);
+                        if (g[x] == p[x]) _inout.Write("+", c = c + 1);
+                        else if (p.Contains(g[x])) _inout.Write("-");
+                    }
+
+                    _inout.WriteLine();
+                }
+            }
 
             // Game over you win
-            success: _inout.WriteLine("Congratulations you guessed the password in " + i + " tries.");
+            _inout.WriteLine("Congratulations you guessed the password in " + i + " tries.");
             _inout.WriteLine("Press any key to quit.");
             _inout.Read();
         }
