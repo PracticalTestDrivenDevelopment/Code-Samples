@@ -1,4 +1,6 @@
 import { expect } from 'chai';
+import { GET_SPEAKERS_SUCCESS } from '../reducers/actionTypes';
+import { getSpeakersSuccess } from './speakerActions';
 
 describe('Speaker Actions', () => {
   describe('Sync Actions', () => {
@@ -28,9 +30,3 @@ describe('Speaker Actions', () => {
     });
   });
 });
-
-const GET_SPEAKERS_SUCCESS = 'GET_SPEAKERS_SUCCESS';
-
-function getSpeakersSuccess(speakers) {
-  return { type: GET_SPEAKERS_SUCCESS, speakers: speakers };
-}
