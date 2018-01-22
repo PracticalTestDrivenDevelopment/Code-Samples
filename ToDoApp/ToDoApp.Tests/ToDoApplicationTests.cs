@@ -26,16 +26,21 @@ namespace ToDoApp.Tests
 
             // Assert
             Assert.NotNull(result);
+            Assert.IsAssignableFrom<IEnumerable<Todo>>(result);
             Assert.Empty(result);
         }
     }
 
     internal class TodoList
     {
-        public IEnumerable<Object> Items { get; } = new List<Object>();
+        public IEnumerable<Todo> Items { get; } = new List<Todo>();
 
         public TodoList()
         {
         }
+    }
+
+    public class Todo
+    {
     }
 }
