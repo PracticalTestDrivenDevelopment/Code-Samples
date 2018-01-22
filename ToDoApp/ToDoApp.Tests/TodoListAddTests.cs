@@ -21,7 +21,7 @@ namespace ToDoApp.Tests
             Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [Fact(Skip = "Forgot to test negative cases first")]
+        [Fact]
         public void ItAddsATodoItemToTheTodoList()
         {
             // Arrange
@@ -54,7 +54,12 @@ namespace ToDoApp.Tests
 
         public void AddTodo(Todo item)
         {
-            throw new ArgumentNullException();
+            if(item == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            _items.Add(item);
         }
     }
 
