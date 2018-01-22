@@ -77,7 +77,7 @@ namespace ToDoApp.Tests
         {
             item = item ?? throw new ArgumentNullException();
 
-            item.Description = item.Description ?? throw new DescriptionRequiredException();
+            item.Validate();
 
             _items.Add(item);
         }
