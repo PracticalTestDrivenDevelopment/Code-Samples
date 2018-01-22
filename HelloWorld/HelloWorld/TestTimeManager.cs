@@ -13,5 +13,4 @@ namespace HelloWorld
 
         public DateTime Now => CurrentTime();
     }
-
 }
