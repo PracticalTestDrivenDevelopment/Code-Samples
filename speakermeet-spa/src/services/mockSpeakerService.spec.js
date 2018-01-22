@@ -21,9 +21,30 @@ describe('Mock Speaker Service', () => {
       // assert
       expect(service.getAll).to.exist;
     });
+
+    describe('No Speakers Exist', () => {
+      it('returns an empty array', () => {
+        // arrange
+        let service = new MockSpeakerService();
+
+        // act
+        let promise = service.getAll();
+
+        // assert
+        return promise.then(result => {
+          expect(result).to.have.lengthOf(0);
+        });
+      });
+    });
   });
 });
 
 class MockSpeakerService {
-  getAll() {}
+  getAll() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Object.assign([], this._speakers));
+      }, 0);
+    });
+  }
 }
