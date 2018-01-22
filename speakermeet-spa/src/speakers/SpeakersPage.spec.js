@@ -9,9 +9,7 @@ describe('Speakers Page', () => {
   });
 
   describe('Render', () => {
-    beforeEach(() => {
-      
-    });
+    beforeEach(() => {});
 
     it('renders', () => {
       // arrange
@@ -32,5 +30,5 @@ describe('Speakers Page', () => {
       expect(component.find('SpeakerList')).to.exist;
       expect(component.find('SpeakerList').props().speakers).to.deep.equal(props.speakers);
     });
-  });
+  });  
 });
