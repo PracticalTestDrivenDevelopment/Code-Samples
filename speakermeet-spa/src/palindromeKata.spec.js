@@ -43,6 +43,17 @@ describe('Is Palindrome', () => {
     // assert
     expect(result).to.be.true;
   });
+
+  it('three letter palindrome', () => {
+    // arrange
+    const value = 'mom';
+
+    // act
+    const result = isPalindrome(value);
+
+    // assert
+    expect(result).to.be.true;
+  });
 });
 
 function isPalindrome(value) {
@@ -52,6 +63,10 @@ function isPalindrome(value) {
 
   if (value.length === 2 && value[0] === value[1]) {
     return true;
+  }
+
+  if (value[0] === value[value.length - 1]) {
+    return isPalindrome(value.substring(1, value.length - 1));
   }
 
   return false;
