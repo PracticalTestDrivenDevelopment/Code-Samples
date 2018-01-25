@@ -16,12 +16,14 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         public Search()
         {
             var fakeRepository = new FakeRepository();
+            var fakeGravatarService = new FakeGravatarService();
+
             SpeakerFactory.Create(fakeRepository);
             SpeakerFactory.Create(fakeRepository, name: "Josh");
             SpeakerFactory.Create(fakeRepository, name: "Joseph");
             SpeakerFactory.Create(fakeRepository, name: "Bill");
 
-            _speakerService = new SpeakerService(fakeRepository);
+            _speakerService = new SpeakerService(fakeRepository, fakeGravatarService);
         }
 
         [Fact]

@@ -9,10 +9,12 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
     public class Get
     {
         private readonly FakeRepository _fakeRepository;
+        private readonly FakeGravatarService _fakeGravatarService;
 
         public Get()
         {
             _fakeRepository = new FakeRepository();
+            _fakeGravatarService = new FakeGravatarService();
         }
 
         [Theory]
@@ -23,7 +25,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var expectedSpeaker = SpeakerFactory.Create(_fakeRepository, id, name);
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             var actualSpeaker = service.Get(expectedSpeaker.Id);
@@ -38,7 +40,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         public void GivenSpeakerNotFoundThenSpeakerNotFoundException()
         {
             // Arrange
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             var exception = Record.Exception(() => service.Get(-1));
@@ -52,7 +54,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var expectedSpeaker = SpeakerFactory.Create(_fakeRepository).IsDeleted();
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             var exception = Record.Exception(() => service.Get(expectedSpeaker.Id));
@@ -66,7 +68,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var expectedSpeaker = SpeakerFactory.Create(_fakeRepository).IsDeleted();
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             var exception = Record.Exception(() => service.Get(expectedSpeaker.Id));
@@ -80,7 +82,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var expectedSpeaker = SpeakerFactory.Create(_fakeRepository);
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             var speaker = service.Get(1);
@@ -95,7 +97,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var expectedSpeaker = SpeakerFactory.Create(_fakeRepository);
-            var service = new SpeakerService(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
 
             // Act
             service.Get(expectedSpeaker.Id);
@@ -110,7 +112,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
             // Arrange
             var fakeRepository = new FakeRepository();
             var expectedSpeaker = SpeakerFactory.Create(fakeRepository, 2, "Bill");
-            var service = new SpeakerService(fakeRepository);
+            var service = new SpeakerService(fakeRepository, _fakeGravatarService);
 
             // Act
             var actualSpeaker = service.Get(expectedSpeaker.Id);
@@ -119,6 +121,53 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
             Assert.True(fakeRepository.GetCalled);
             Assert.Equal(expectedSpeaker.Id, actualSpeaker.Id);
             Assert.Equal(expectedSpeaker.Name, actualSpeaker.Name);
+        }
+
+        [Fact]
+        public void ItCallsGravatarService()
+        {
+            // Arrange
+            var expectedSpeaker = SpeakerFactory.Create(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
+
+            // Act
+            service.Get(expectedSpeaker.Id);
+
+            // Assert
+            Assert.True(_fakeGravatarService.WithEmailCalled);
+        }
+
+        [Fact]
+        public void ItCallsGravatarServiceWithEmail()
+        {
+            // Arrange
+            var expectedSpeaker = SpeakerFactory.Create(_fakeRepository, emailAddress: "example@test.com");
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
+
+            // Act
+            service.Get(expectedSpeaker.Id);
+
+            // Assert
+            Assert.True(_fakeGravatarService.WithEmailCalled);
+            Assert.Equal(expectedSpeaker.EmailAddress, _fakeGravatarService.CalledWith);
+        }
+
+        [Fact]
+        public void GivenGravatarServiceThenItSetsGravatar()
+        {
+            // Arrange
+            var expectedSpeaker = SpeakerFactory.Create(_fakeRepository);
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
+
+            // Act
+            var actualSpeaker = service.Get(expectedSpeaker.Id);
+            var expectedGravatar = _fakeGravatarService.GetGravatar(expectedSpeaker.EmailAddress);
+
+            // Assert
+            Assert.True(_fakeGravatarService.WithEmailCalled);
+            Assert.Equal(expectedSpeaker.Id, actualSpeaker.Id);
+            Assert.Equal(expectedSpeaker.Name, actualSpeaker.Name);
+            Assert.Equal(expectedGravatar, actualSpeaker.Gravatar);
         }
     }
 }

@@ -11,10 +11,12 @@ namespace SpeakerMeet.Services
     public class SpeakerService : ISpeakerService
     {
         private readonly IRepository<Speaker> _repository;
+        private readonly IGravatarService _gravatarService;
 
-        public SpeakerService(IRepository<Speaker> repository)
+        public SpeakerService(IRepository<Speaker> repository, IGravatarService gravatarService)
         {
             _repository = repository;
+            _gravatarService = gravatarService;
         }
 
         public IEnumerable<Speaker> Search(string searchString)
@@ -50,14 +52,17 @@ namespace SpeakerMeet.Services
 
             if (speaker == null || speaker.IsDeleted)
             {
-                throw new SpeakerNotFoundException();
+                throw new SpeakerNotFoundException(id);
             }
+
+            var gravatar = _gravatarService.GetGravatar(speaker.EmailAddress);
 
             return new SpeakerDetail
             {
                 Id = speaker.Id,
                 Name = speaker.Name,
                 Location = speaker.Location,
+                Gravatar = gravatar
             };
         }
     }

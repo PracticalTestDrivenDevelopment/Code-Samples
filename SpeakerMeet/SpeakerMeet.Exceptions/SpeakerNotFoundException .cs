@@ -4,7 +4,7 @@ namespace SpeakerMeet.Exceptions
 {
     public class SpeakerNotFoundException : Exception
     {
-        public SpeakerNotFoundException() : base("Speaker Not Found")
+        public SpeakerNotFoundException(int id) : base($"Speaker {id} not found.")
         {
         }
     }

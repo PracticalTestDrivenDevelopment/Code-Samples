@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SpeakerMeet.DTO;
+using SpeakerMeet.Services.Interfaces;
 using SpeakerMeet.Services.Tests.Factories;
 using SpeakerMeet.Services.Tests.Fakes;
 using Xunit;
@@ -14,13 +15,15 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
     {
         private readonly SpeakerService _speakerService;
         private readonly FakeRepository _fakeRepository;
+        private readonly IGravatarService _fakeGravatarService;
 
         public GetAll()
         {
             _fakeRepository = new FakeRepository();
+            _fakeGravatarService = new FakeGravatarService();
             SpeakerFactory.Create(_fakeRepository);
 
-            _speakerService = new SpeakerService(_fakeRepository);
+            _speakerService = new SpeakerService(_fakeRepository, _fakeGravatarService);
         }
 
         [Fact]
@@ -76,7 +79,7 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
             // Arrange
             var fakeRepository = new FakeRepository();
             SpeakerFactory.Create(fakeRepository).IsDeleted();
-            var speakerService = new SpeakerService(fakeRepository);
+            var speakerService = new SpeakerService(fakeRepository, _fakeGravatarService);
 
             // Act
             var speakers = speakerService.GetAll().ToList();

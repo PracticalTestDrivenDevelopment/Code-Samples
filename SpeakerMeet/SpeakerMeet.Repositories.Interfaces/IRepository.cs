@@ -9,7 +9,9 @@ namespace SpeakerMeet.Repositories.Interfaces
         T Get(int id);
         T Get(Func<T, bool> predicate);
         IQueryable<T> GetAll();
-        T Save(T item);
+        T Create(T item);
+        T Update(T item);
         IRepository<T> Include(Expression<Func<T, object>> path);
+        void Delete(T item);
     }
 }

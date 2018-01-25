@@ -26,7 +26,7 @@ namespace SpeakerMeet.API.Tests.SpeakerControllerTests
             _speakerServiceMock.Setup(x => x.Get(It.IsAny<int>()))
                 .Returns(() => _speaker);
             _speakerServiceMock.Setup(x => x.Get(-1))
-                .Returns(() => throw new SpeakerNotFoundException());
+                .Returns(() => throw new SpeakerNotFoundException(-1));
 
             _controller = new SpeakerController(_speakerServiceMock.Object);
         }
@@ -120,7 +120,7 @@ namespace SpeakerMeet.API.Tests.SpeakerControllerTests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal("Speaker Not Found", result.Value);
+            Assert.Equal("Speaker -1 not found.", result.Value);
         }
     }
 }

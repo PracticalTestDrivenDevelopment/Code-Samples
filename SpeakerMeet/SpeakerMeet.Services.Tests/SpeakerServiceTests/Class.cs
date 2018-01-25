@@ -10,9 +10,10 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
         {
             // Arrange
             var fakeRepository = new FakeRepository();
+            var fakeGravatarService = new FakeGravatarService();
 
             // Act
-            var service = new SpeakerService(fakeRepository);
+            var service = new SpeakerService(fakeRepository, fakeGravatarService);
 
             // Assert
             Assert.NotNull(service);
