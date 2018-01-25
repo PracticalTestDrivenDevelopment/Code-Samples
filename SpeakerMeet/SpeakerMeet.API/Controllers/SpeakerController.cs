@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using SpeakerMeet.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
+using SpeakerMeet.Exceptions;
 using SpeakerMeet.Services.Interfaces;
 
 namespace SpeakerMeet.API.Controllers
@@ -25,6 +22,27 @@ namespace SpeakerMeet.API.Controllers
             var speakers = _speakerService.Search(searchString);
 
             return Ok(speakers);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var speakers = _speakerService.GetAll();
+
+            return Ok(speakers);
+        }
+
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var speaker = _speakerService.Get(id);
+                return Ok(speaker);
+            }
+            catch (SpeakerNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

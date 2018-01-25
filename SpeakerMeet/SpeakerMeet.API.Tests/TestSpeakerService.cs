@@ -10,5 +10,15 @@ namespace SpeakerMeet.API.Tests
         {
             throw new System.NotImplementedException();
         }
+
+        public IEnumerable<SpeakerSummary> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public SpeakerDetail Get(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
