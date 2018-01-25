@@ -6,5 +6,7 @@ namespace SpeakerMeet.Services.Interfaces
     public interface ISpeakerService
     {
         IEnumerable<Speaker> Search(string searchString);
+        IEnumerable<SpeakerSummary> GetAll();
+        SpeakerDetail Get(int id);
     }
 }
