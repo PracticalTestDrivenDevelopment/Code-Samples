@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using SpeakerMeet.DTO;
+using SpeakerMeet.Models;
 using SpeakerMeet.Repositories.Interfaces;
 
 namespace SpeakerMeet.Services.Tests.Fakes

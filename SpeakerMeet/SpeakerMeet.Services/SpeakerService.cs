@@ -10,10 +10,10 @@ namespace SpeakerMeet.Services
 {
     public class SpeakerService : ISpeakerService
     {
-        private readonly IRepository<Speaker> _repository;
+        private readonly IRepository<Models.Speaker> _repository;
         private readonly IGravatarService _gravatarService;
 
-        public SpeakerService(IRepository<Speaker> repository, IGravatarService gravatarService)
+        public SpeakerService(IRepository<Models.Speaker> repository, IGravatarService gravatarService)
         {
             _repository = repository;
             _gravatarService = gravatarService;

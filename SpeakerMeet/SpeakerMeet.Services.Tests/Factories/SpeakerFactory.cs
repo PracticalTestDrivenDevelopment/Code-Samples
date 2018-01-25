@@ -1,4 +1,4 @@
-﻿using SpeakerMeet.DTO;
+﻿using SpeakerMeet.Models;
 using SpeakerMeet.Services.Tests.Fakes;
 
 namespace SpeakerMeet.Services.Tests.Factories

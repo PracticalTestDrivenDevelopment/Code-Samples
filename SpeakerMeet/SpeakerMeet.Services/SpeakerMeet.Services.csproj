@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpeakerMeet.Exceptions\SpeakerMeet.Exceptions.csproj" />
+    <ProjectReference Include="..\SpeakerMeet.Models\SpeakerMeet.Models.csproj" />
     <ProjectReference Include="..\SpeakerMeet.Repositories.Interfaces\SpeakerMeet.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\SpeakerMeet.Services.Interfaces\SpeakerMeet.Services.Interfaces.csproj" />
   </ItemGroup>
