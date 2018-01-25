@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SpeakerMeet.Repositories.Interfaces;
+﻿using SpeakerMeet.Repositories.Interfaces;
 
 namespace SpeakerMeet.DTO
 {
