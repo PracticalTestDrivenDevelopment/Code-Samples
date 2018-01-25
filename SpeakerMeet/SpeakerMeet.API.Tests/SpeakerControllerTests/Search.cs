@@ -7,15 +7,15 @@ using SpeakerMeet.DTO;
 using SpeakerMeet.Services.Interfaces;
 using Xunit;
 
-namespace SpeakerMeet.API.Tests
+namespace SpeakerMeet.API.Tests.SpeakerControllerTests
 {
-    public class SpeakerControllerSearchTests
+    public class Search
     {
         private readonly SpeakerController _controller;
         private static Mock<ISpeakerService> _speakerServiceMock;
         private readonly List<Speaker> _speakers;
 
-        public SpeakerControllerSearchTests()
+        public Search()
         {
             _speakers = new List<Speaker> { new Speaker
             {
