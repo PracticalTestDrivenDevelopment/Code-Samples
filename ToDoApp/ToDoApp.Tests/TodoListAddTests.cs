@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace ToDoApp.Tests
@@ -59,32 +60,28 @@ namespace ToDoApp.Tests
 
     internal class TodoList
     {
-        private List<Todo> _items = new List<Todo>();
+        private readonly List<Todo> _items = new List<Todo>();
 
-        public IEnumerable<Todo> Items
-        {
-            get
-            {
-                return _items;
-            }
-        }
+        public IEnumerable<Todo> Items => _items.Where(t => !t.IsComplete || ShowCompleted);
 
-        public TodoList()
-        {
-        }
+        public bool ShowCompleted { get; set; }
 
         public void AddTodo(Todo item)
         {
             item = item ?? throw new ArgumentNullException();
-
             item.Validate();
-
             _items.Add(item);
+        }
+
+        public void Complete(Todo item)
+        {
+            item.IsComplete = true;
         }
     }
 
-    public class Todo
+    internal class Todo
     {
+        public bool IsComplete { get; set; }
         public string Description { get; set; }
 
         internal void Validate()

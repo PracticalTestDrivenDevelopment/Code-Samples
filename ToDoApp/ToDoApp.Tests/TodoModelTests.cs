@@ -13,5 +13,15 @@ namespace ToDoApp.Tests
             // Act
             todo.Description = "Test Description";
         }
+
+        [Fact]
+        public void ItHasIsComplete()
+        {
+            // Arrange
+            var todo = new Todo();
+
+            // Act
+            todo.IsComplete = true;
+        }
     }
 }

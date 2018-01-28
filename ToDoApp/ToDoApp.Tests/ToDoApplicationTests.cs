@@ -41,5 +41,15 @@ namespace ToDoApp.Tests
             // Act
             todo.AddTodo(item);
         }
+
+        [Fact(Skip = "Yak shaving - no longer needed")]
+        public void ShowCompletedExists()
+        {
+            // Arrange
+            var todo = new TodoList();
+
+            // Act
+            todo.ShowCompleted = true;
+        }
     }
 }
