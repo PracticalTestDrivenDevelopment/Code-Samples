@@ -13,11 +13,6 @@ namespace HelloWorld
         [InlineData(16)]
         [InlineData(17)]
         [InlineData(18)]
-        [InlineData(19)]
-        [InlineData(20)]
-        [InlineData(21)]
-        [InlineData(22)]
-        [InlineData(23)]
         public void GivenAfternoon_ThenAfternoonMessage(int hour)
         {
             // Arrange
@@ -57,6 +52,26 @@ namespace HelloWorld
 
             // Assert
             Assert.Equal("Good morning", message);
+        }
+
+        [Theory]
+        [InlineData(19)]
+        [InlineData(20)]
+        [InlineData(21)]
+        [InlineData(22)]
+        [InlineData(23)]
+        public void GivenEvening_ThenEveningMessage(int hour)
+        {
+            // Arrange  
+            var eveningTime = new TestTimeManager();
+            eveningTime.SetDateTime(new DateTime(2017, 7, 13, hour, 0, 0));
+            var messageUtility = new MessageUtility(eveningTime);
+
+            // Act
+            var message = messageUtility.GetMessage();
+
+            // Assert
+            Assert.Equal("Good evening", message);
         }
     }
 }

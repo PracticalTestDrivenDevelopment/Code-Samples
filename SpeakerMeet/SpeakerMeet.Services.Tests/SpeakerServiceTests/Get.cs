@@ -169,5 +169,20 @@ namespace SpeakerMeet.Services.Tests.SpeakerServiceTests
             Assert.Equal(expectedSpeaker.Name, actualSpeaker.Name);
             Assert.Equal(expectedGravatar, actualSpeaker.Gravatar);
         }
+
+        [Fact]
+        public void GivenSpeakerIsNotActiveThenSpeakerNotFoundException()
+        {
+            // Arrange
+            var expectedSpeaker = SpeakerFactory.Create(_fakeRepository);
+            expectedSpeaker.IsActive = false;
+            var service = new SpeakerService(_fakeRepository, _fakeGravatarService);
+
+            // Act
+            var exception = Record.Exception(() => service.Get(expectedSpeaker.Id));
+
+            // Assert
+            Assert.IsAssignableFrom<SpeakerNotFoundException>(exception);
+        }
     }
 }

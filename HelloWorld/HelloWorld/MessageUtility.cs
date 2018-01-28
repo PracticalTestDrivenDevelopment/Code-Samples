@@ -13,8 +13,9 @@
         {
             if (_timeManager.Now.Hour < 12)
                 return "Good morning";
-
-            return "Good afternoon";
+            if (_timeManager.Now.Hour <= 18)
+                return "Good afternoon";
+            return "Good evening";
         }
     }
 }
