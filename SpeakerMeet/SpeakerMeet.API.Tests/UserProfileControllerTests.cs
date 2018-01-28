@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SpeakerMeet.API.Controllers;
-using Xunit;
-
-namespace SpeakerMeet.API.Tests
+﻿namespace SpeakerMeet.API.Tests
 {
     public class UserProfileControllerTests
     {
