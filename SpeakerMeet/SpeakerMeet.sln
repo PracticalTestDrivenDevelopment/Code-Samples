@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.API", "SpeakerMeet.API\SpeakerMeet.API.csproj", "{A6A447DF-38BB-4FF5-9CCD-6B4E9F437CD5}"
 EndProject
@@ -23,13 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Business", "Spe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Business.Tests", "SpeakerMeet.Business.Tests\SpeakerMeet.Business.Tests.csproj", "{952E0163-FFEE-4BB1-944B-45CC8C98602B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Api.IntegrationTest", "SpeakerMeet.Api.IntegrationTest\SpeakerMeet.Api.IntegrationTest.csproj", "{0DEB764B-0C4B-4361-80D0-2C7E80E622D2}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Exceptions", "SpeakerMeet.Exceptions\SpeakerMeet.Exceptions.csproj", "{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Models", "SpeakerMeet.Models\SpeakerMeet.Models.csproj", "{2B491EF0-F6D2-45A1-A549-5367741CD2DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Repositories", "SpeakerMeet.Repositories\SpeakerMeet.Repositories.csproj", "{5FD7C4F6-7F97-4828-ADD8-56A2B85E1027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Repositories", "SpeakerMeet.Repositories\SpeakerMeet.Repositories.csproj", "{5FD7C4F6-7F97-4828-ADD8-56A2B85E1027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Repositories.Tests", "SpeakerMeet.Repositories.Tests\SpeakerMeet.Repositories.Tests.csproj", "{88B27A62-0CB9-413F-81F4-00020CF2FDE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Repositories.Tests", "SpeakerMeet.Repositories.Tests\SpeakerMeet.Repositories.Tests.csproj", "{88B27A62-0CB9-413F-81F4-00020CF2FDE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952E0163-FFEE-4BB1-944B-45CC8C98602B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DEB764B-0C4B-4361-80D0-2C7E80E622D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DEB764B-0C4B-4361-80D0-2C7E80E622D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DEB764B-0C4B-4361-80D0-2C7E80E622D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DEB764B-0C4B-4361-80D0-2C7E80E622D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2030AE68-FEAA-46B0-BE70-D0AD75B04EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
