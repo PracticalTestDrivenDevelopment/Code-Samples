@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace CodeKata
@@ -63,18 +64,30 @@ namespace CodeKata
             Assert.Equal("FizzBuzz", result);
         }
 
+        [Theory]
+        [InlineData(2)]
+        [InlineData(4)]
+        [InlineData(7)]
+        [InlineData(8)]
+        public void GivenNonDivisibleGreaterThan1ThenNumberNotFound(int number)
+        {
+            // Arrange
+            // Act
+            var result = FizzBuzz(number);
+
+            // Assert
+            Assert.Equal("Number not found", result);
+        }
+
         private object FizzBuzz(int value)
         {
             if (value % 15 == 0)
                 return "FizzBuzz";
-
             if (value % 5 == 0)
                 return "Buzz";
-
             if (value % 3 == 0)
                 return "Fizz";
-
-            return value;
+            return value == 1 ? (object)value : "Number not found";
         }
     }
 }
