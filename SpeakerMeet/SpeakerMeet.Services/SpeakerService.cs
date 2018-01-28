@@ -50,7 +50,7 @@ namespace SpeakerMeet.Services
         {
             var speaker = _repository.Get(id);
 
-            if (speaker == null || speaker.IsDeleted)
+            if (speaker == null || speaker.IsDeleted || !speaker.IsActive)
             {
                 throw new SpeakerNotFoundException(id);
             }
