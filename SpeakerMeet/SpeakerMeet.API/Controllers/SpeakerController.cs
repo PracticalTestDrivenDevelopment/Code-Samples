@@ -32,6 +32,7 @@ namespace SpeakerMeet.API.Controllers
             return Ok(speakers);
         }
 
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
